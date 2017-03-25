@@ -35,37 +35,25 @@ namespace ApiTransacciones.Controllers
             return "value";
         }
 
-        //// POST api/values  //Agregar Transaccion
-        //[HttpPost]
-        //public string Post([FromBody]TransaccionViewModel t)
-        //{
-        //    string id = RandomString(15);
-        //    Transaccion nuevaTransaccion = new Transaccion {
-        //        id = id,
-        //        usuario = t.usuario,
-        //        activo = t.activo,
-        //        departamento = t.departamento,
-        //        empresa = t.empresa,
-        //        tiempoRenta = t.tiempoRenta,
-        //        fecha = DateTime.Now
-        //    };
-        //    arbol.insertar(nuevaTransaccion);
-        //    return id;
-        //}
-
         // POST api/values  //Agregar Transaccion
         [HttpPost]
-        public void PostTest([FromBody]string t)
+        public Transaccion Post(TransaccionViewModel t)
         {
             string id = RandomString(15);
             Transaccion nuevaTransaccion = new Transaccion
             {
                 id = id,
+                usuario = t.usuario,
+                activo = t.activo,
+                departamento = t.departamento,
+                empresa = t.empresa,
+                tiempoRenta = t.tiempoRenta,
                 fecha = DateTime.Now
             };
             arbol.insertar(nuevaTransaccion);
+            return nuevaTransaccion;
         }
-
+        
         // PUT api/values/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)

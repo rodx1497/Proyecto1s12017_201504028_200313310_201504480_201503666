@@ -21,25 +21,37 @@ namespace ApiTransacciones.Controllers
             arbol = arbolPrincipal;
         }
 
-        // GET: api/values
+        // GET: api/Transacciones
+        // devolvera el string para poder graficar con graphviz
         [HttpGet]
-        public IEnumerable<string> Get()
+        public dynamic Get()
         {
-            return new string[] { "value1", "value2" };
+            return new { graphviz = "digraph G { " + arbol.graphviz() + " }"};
         }
 
-        // GET api/values/5
+        // GET api/Transacciones/12345abcde67890
+        // Buscar una transacción por Id
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Transaccion Get(string id)
         {
-            return "value";
+
+            NodoPagina n = arbol.Buscar(id);
+            if (n != null)
+            {
+                return n.Transaccion;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        // POST api/values  //Agregar Transaccion
+        // POST api/Transacciones  
+        // Agregar nueva Transaccion
         [HttpPost]
         public Transaccion Post(TransaccionViewModel t)
         {
-            string id = RandomString(15);
+            string id = Utils.RandomString(15);
             Transaccion nuevaTransaccion = new Transaccion
             {
                 id = id,
@@ -53,42 +65,22 @@ namespace ApiTransacciones.Controllers
             arbol.insertar(nuevaTransaccion);
             return nuevaTransaccion;
         }
-        
+
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        // Este api no tiene opción para hacer update a una transacción
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        // Este api no tiene opción para eliminar una transacción
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
 
-        string RandomString(int length, string alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
-        {
-            var outOfRange = byte.MaxValue + 1 - (byte.MaxValue + 1) % alphabet.Length;
-
-            return string.Concat(
-                Enumerable
-                    .Repeat(0, int.MaxValue)
-                    .Select(e => RandomByte())
-                    .Where(randomByte => randomByte < outOfRange)
-                    .Take(length)
-                    .Select(randomByte => alphabet[randomByte % alphabet.Length])
-            );
-        }
-
-        byte RandomByte()
-        {
-            using (var randomizationProvider = System.Security.Cryptography.RandomNumberGenerator.Create())
-            {
-                var randomBytes = new byte[1];
-                randomizationProvider.GetBytes(randomBytes);
-                return randomBytes.Single();
-            }
-        }
+        
 
 
 

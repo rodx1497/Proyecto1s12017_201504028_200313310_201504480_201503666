@@ -5,6 +5,7 @@
     <body>
 
         <h1> POST /trasacciones </h1>
+        <p>Para agregar transacciones</p>
 
         <form id="create" action="http://localhost:52240/api/Transacciones" method="post">
             <br />activo:<input id="activo" name="activo" type="text" />
@@ -14,6 +15,13 @@
             <br />tiempoRenta:<input id="tiempoRenta" name="tiempoRenta" type="text" />
             <br/><br/>
             <input type="submit" value="enviar" />
+        </form>
+
+        <h1> POST /trasacciones </h1>
+        <p>Para obtener el string util para generar la grafica del arbol con Graphviz</p>
+
+        <form id="request" action="http://localhost:52240/api/Transacciones" method="get">
+            <input type="submit" value="Solicitar Graphviz" />
         </form>
     </body>
 </html>

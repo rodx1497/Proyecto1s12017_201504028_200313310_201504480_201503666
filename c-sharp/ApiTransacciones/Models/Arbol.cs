@@ -69,24 +69,57 @@
             return this.BuscarTransaccion(this.Raiz, id);
         }
 
-        private NodoPagina BuscarTransaccion(Nodo node, string key)
+        private NodoPagina BuscarTransaccion(Nodo nodoRaiz, string id)
         {
-            int i = node.Pagina.TakeWhile(entry => key.CompareTo(entry.IdTransaccion) > 0).Count();
+            int i = nodoRaiz.Pagina.TakeWhile(entry => id.CompareTo(entry.IdTransaccion) > 0).Count();
 
-            if (i < node.Pagina.Count && node.Pagina[i].IdTransaccion.CompareTo(key) == 0)
+            if (i < nodoRaiz.Pagina.Count && nodoRaiz.Pagina[i].IdTransaccion.CompareTo(id) == 0)
             {
-                return node.Pagina[i];
+                return nodoRaiz.Pagina[i];
             }
 
-            return node.EsHoja ? null : this.BuscarTransaccion(node.Hojas[i], key);
+            return nodoRaiz.EsHoja ? null : this.BuscarTransaccion(nodoRaiz.Hojas[i], id);
+        }
+        public string graphviz()
+        {
+            return obtenerGraphviz(Raiz).cuerpo;
+        }
+        private NodoGraphviz obtenerGraphviz(Nodo nodoRaiz)
+        {
+            string nombreNodo = "nodo" + Utils.RandomString(5);
+            string etiquetaNodo = "";
+            foreach(NodoPagina pagina in nodoRaiz.Pagina)
+            {
+                if (etiquetaNodo != "") etiquetaNodo += " | ";
+                etiquetaNodo += pagina.IdTransaccion;
+            }
+            string conexiones = "";
+            string cuerpo = $"{nombreNodo}[label=\"{etiquetaNodo}\", shape=record];";
+            if (!nodoRaiz.EsHoja) {
+                conexiones = "{ ";
+                for (int i = 0; i < nodoRaiz.Hojas.Count; i++) {
+                    NodoGraphviz graphvizNodo = this.obtenerGraphviz(nodoRaiz.Hojas[i]);
+                    conexiones += graphvizNodo.nombre + " ";
+                    cuerpo += graphvizNodo.cuerpo;
+                }
+                conexiones += "}; ";
+                cuerpo += nombreNodo + " -> " + conexiones;
+            }
+            return new NodoGraphviz
+            {
+                nombre = nombreNodo,
+                etiqueta = etiquetaNodo,
+                conexiones = conexiones,
+                cuerpo = cuerpo
+            } ; 
         }
 
-        private void DividirHoja(Nodo raiz, int posicion, Nodo nodo)
+        private void DividirHoja(Nodo nodoRaiz, int posicion, Nodo nodo)
         {
             var newNode = new Nodo(this.Orden);
 
-            raiz.Pagina.Insert(posicion, nodo.Pagina[this.Orden - 1]);
-            raiz.Hojas.Insert(posicion + 1, newNode);
+            nodoRaiz.Pagina.Insert(posicion, nodo.Pagina[this.Orden - 1]);
+            nodoRaiz.Hojas.Insert(posicion + 1, newNode);
 
             newNode.Pagina.AddRange(nodo.Pagina.GetRange(this.Orden, this.Orden - 1));
             

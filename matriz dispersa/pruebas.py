@@ -70,11 +70,24 @@ listad.agregar(usuario,contra,nombre,empresa,dep)
 "listad.eliminar(gg[0],gg[1])"
 
 
-listad.graficar()
 
-listad.buscar_user("marifogmail.com","united fruitt","sociales")
 
-listad.buscar_user_agregar_activo("marifogmail.com","united fruitt","sociales","Nombre activo","descripcion")
-listad.buscar_user_agregar_activo("marifogmail.com","united fruitt","sociales","Nombre activo","descripcion")
+#listad.buscar_user("mariaogmail.com","united fruitt","sociales")
+#comprobar la contraseña debulve true o false (usuario,contra,empresa,dep)
+print("contraseña:",listad.comprobar_inicio("mariaogmail.com","1dffa d343","united fruitt","sociales"))
+
+listad.buscar_user_agregar_activo("mariaogmail.com","united fruitt","sociales","Nombre activo1","descripcion")
+listad.buscar_user_agregar_activo("marifogmail.com","united fruitt","sociales","Nombre activo2","descripcion")
+
+listad.buscar_user_agregar_activo("mariaogmail.com","united fruitt","sociales","Nombre activo3","descripcion")
+listad.buscar_user_agregar_activo("marifogmail.com","united fruitt","sociales","Nombre activo4","descripcion")
+
+listad.buscar_user_agregar_activo("mariaogmail.com","united fruitt","sociales","Nombre activo5","descripcion")
+listad.buscar_user_agregar_activo("marifogmail.com","united fruitt","sociales","Nombre activo6","descripcion")
+listad.buscar_user_agregar_activo("mariaogmail.com","united fruitt","sociales","Nombre activo7","descripcion")
+listad.buscar_user_agregar_activo("marifogmail.com","united fruitt","sociales","Nombre activo8","descripcion")
+listad.buscar_user_agregar_activo("mariaogmail.com","united fruitt","sociales","Nombre activo9","descripcion")
+listad.buscar_user_agregar_activo("marifogmail.com","united fruitt","sociales","Nombre activo10","descripcion")
+listad.graficarcompleto()
 #listad.buscar_user_modificar_activo("marifogmail.com","united fruitt","sociales","Nombre","descripcion","num random")
 

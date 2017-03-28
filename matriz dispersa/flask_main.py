@@ -31,5 +31,14 @@ class Usuario():
 		listad.buscar_user_agregar_activo(usuario,empresa,dep,nombre_activo,descripcion)
 		return "Agregado activo"
 
+	@app.route('/lista_compobrar_contra',methods=['POST'])
+	def comprobar():
+		usuario = str(request.form['usuario'])
+		contra = str(request.form['contraseña'])
+		empresa= str(request.form['empresa'])
+		dep = str(request.form['departamento'])
+		#comprobar la contraseña debulve true o false (usuario,contra,empresa,dep)   * debuelve none si no existe el nodo
+		return 	listad.comprobar_inicio(usuario,contra,empresa,dep)
+
 if __name__ == "__main__":
   app.run(debug=True, host='0.0.0.0')

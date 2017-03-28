@@ -252,7 +252,11 @@ class ArbolAvl:
             raise        
         self.grafo()
         return self.cadena
-   
+
+    def obtener_r__m(self):
+        o = self.raiz.dato
+        return str(o.obtenerdato())
+
     def inorden(self, r): 
         if(r != None):  
             r1=""
@@ -280,8 +284,6 @@ class ArbolAvl:
             self.cadena=self.cadena+"\n"+aux+"\n t"+str(r1)+aux2+";"+"t"+str(r1)+aux3+";"
    
     def grafo(self):
-        self.cadena="\n digraph g{"
         self.inorden(self.raiz)
-        self.cadena=self.cadena+"\n}"
         print(self.cadena)
 

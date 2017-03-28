@@ -1,0 +1,51 @@
+
+ digraph g{
+ta17[label="a17
+telefono
+cellular"];
+ ta17;ta17;
+ta7[label="a7
+adorno
+adorno"];
+ ta7;ta7;
+ta51[label="a51
+piedrareemplazo
+hojas reemplazo"];
+ ta51;ta51-> ta7;
+ta48[label="a48
+desodo
+desodo"];
+ ta48-> ta17;ta48-> ta51;
+ta90[label="a90
+carpa
+carpa"];
+ ta90;ta90;
+ta98[label="a98
+lampara
+lampara"];
+ ta98-> ta90;ta98;
+tb42[label="b42
+ho
+ho"];
+ tb42-> ta98;tb42;
+tp90[label="p90
+hola
+piedrareemplazo"];
+ tp90;tp90;
+tz10[label="z10
+lana
+lana"];
+ tz10;tz10;
+ts60[label="s60
+cuaderno
+cua"];
+ ts60-> tp90;ts60-> tz10;
+tg10[label="g10
+lana
+lana"];
+ tg10-> tb42;tg10-> ts60;
+ta74[label="a74
+ho
+ho"];
+ ta74-> ta48;ta74-> tg10;
+}

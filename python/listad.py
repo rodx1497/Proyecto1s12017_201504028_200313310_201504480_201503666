@@ -1,6 +1,9 @@
 import nodosd
 import listasimple
+from random import choice
 from subprocess import check_output
+from ArbolAvl import ArbolAvl
+from activo import activo
 class listad1:
 
 	def __init__(self):
@@ -403,7 +406,7 @@ class listad1:
 
 
 
-	def buscarunicouser(self,user,emp,dep):
+	def buscar_user(self,user,emp,dep):
 		nodotem= self.cl
 		nodotemdep = self.cdir
 
@@ -415,18 +418,98 @@ class listad1:
 		nododotemub = nodosd.nodosd1()
 		while (nodotem!=None):
 			if (cabeceral(nodotem)!=None):
-				print ("cabeceral",cabeceral(nodotem).getinfo())
-				if (user ==(str(nodotem.getinfo())) and emp == cabeceral(nodotem).getinfo()):
-					
-					nododotemub =nodotem
-					break
+				print ("nodo del cabeceral",nodotem.getinfo(),"cabeceral",cabeceral(nodotem).getinfo())
+				print ("nodo del cabeceral2",user,"cabeceral2",emp)
+				if (emp == cabeceral(nodotem).getinfo()):
+					nododd = nodotem
+					if (user ==(str(nodotem.getinfo())) and emp == cabeceral(nodotem).getinfo()):
+						nododotemub =nodotem
+						print ("entrp")
+						print("Encontrado")
+						print("usuario",nododotemub.getinfo())
+						print("contra",nododotemub.getcontra())
+						print("nombre completo",nododotemub.getinfo())
+						print("avl",nododotemub.getavl())
+						break
+					while (nododd!=None):
+
+
+						if (user == nododd.getinfo()):
+							nododotemub =nododd
+							print ("entrp")
+							print("Encontrado")
+							print("usuario",nododotemub.getinfo())
+							print("contra",nododotemub.getcontra())
+							print("nombre completo",nododotemub.getinfo())
+							print("avl",nododotemub.getavl())
+							break
+						nododd = nododd.getatras()
+
+			nodotem = nodotem.getsig()
+		if (nodotem==None):
+			print("No encontrado")
+
+
+	def buscar_user_agregar_activo(self,user,emp,dep,activos,desc):
+		nodotem= self.cl
+		nodotemdep = self.cdir
+
+		while (nodotem!=None):
+			if ((dep) ==(str(nodotem.getinfo()))):
+				break
+			nodotem = nodotem.getabajo()
+
+		nododotemub = nodosd.nodosd1()
+		while (nodotem!=None):
+			if (cabeceral(nodotem)!=None):
+				print ("nodo del cabeceral",nodotem.getinfo(),"cabeceral",cabeceral(nodotem).getinfo())
+				print ("nodo del cabeceral2",user,"cabeceral2",emp)
+				if (emp == cabeceral(nodotem).getinfo()):
+					nododd = nodotem
+					if (user ==(str(nodotem.getinfo())) and emp == cabeceral(nodotem).getinfo()):
+						nododotemub =nodotem
+						numram = generar_random()
+						if(nododotemub.getavl()==None):
+							avl= ArbolAvl()
+							prueba1=activo(activo,desc, numram)
+							avl.insertar(prueba1)
+							nododotemub.setavl(avl)
+						else:
+							avltemp = nododotemub.getavl()
+							prueba2=activo(activos,desc,numram)
+							avltemp.insertar(prueba2)
+						break
+					while (nododd!=None):
+
+						if (user == nododd.getinfo()):
+							nododotemub =nododd
+							numram = generar_random()
+							if(nododotemub.getavl()==None):
+								avl= ArbolAvl()
+								prueba1=activo(activo,desc, numram)
+								avl.insertar(prueba1)
+								nododotemub.setavl(avl)
+							else:
+								avltemp = nododotemub.getavl()
+								prueba2=activo(activos,desc,numram)
+								avltemp.insertar(prueba2)
+								break
+						nododd = nododd.getatras()
 
 			nodotem = nodotem.getsig()
 
-		if (nododotemub!=None):
-			print("dostres")
-		else: 
-			print("saber")
+	
+
+
+
+			
+
+
+			
+
+
+
+
 
 
 
@@ -745,7 +828,196 @@ class listad1:
 		archi.write("}")
 		archi.close()
 		#cambiar la direccion del archivo txt creado y a del dot
-		check_output('"C:\\Program Files (x86)\\Graphviz2.30\\bin\\dot.exe" -Tjpg C:\\Users\\migue\\Documents\\NetBeansProjects\\[EDD]Programas\\[EDD]Proyecto1\python\datosm.txt -o C:\\Users\\migue\\Documents\\NetBeansProjects\\[EDD]Programas\\[EDD]Proyecto1\python\\grafom1.jpg', shell=True)
+		check_output('"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe" -Tjpg C:\\Users\\HP\\datosm.txt -o C:\\Users\\HP\\Documents\\1.1\\grafom1.jpg', shell=True)
+
+
+	def graficarcompleto(self):
+  #doctest: +ELLIPSIS
+		archi=open('datosm.txt','w')
+		archi.close()
+		archi=open('datosm.txt','a')
+		nodoteml = self.cl
+		nodotemd =self.cdir
+		archi.write("digraph algo{\nnode [shape=box] \n ")
+
+		while (nodoteml!=None):
+
+			nodoteml=nodoteml.getabajo()
+		
+		archi.write("{\n ")
+		archi.write("rank=same\n ")
+		archi.write("INICIO\n ")
+		while (nodotemd!=None):
+			archi.write("\""+str(nodotemd.getinfo())+"\"")
+			archi.write("[rankdir=LR]\n ")
+			nodotemd=nodotemd.getsig()
+		archi.write("}\n ")
+		archi.write(str("INICIO"))
+		archi.write(str("->"))
+		archi.write("\""+str(self.cl.getinfo())+"\"")
+		archi.write("\n")
+		archi.write("INICIO")
+		archi.write(str("->"))
+		archi.write("\""+self.cdir.getinfo()+"\"")
+		archi.write("\n")
+
+		
+		nodoteml = self.cl
+		nodotemd =self.cdir
+		while (nodoteml!=None and nodoteml.getabajo()!=None):
+			archi.write("\""+str(nodoteml.getinfo())+"\"")
+			archi.write(str("->"))
+			archi.write("\""+str(nodoteml.getabajo().getinfo())+"\"")
+			archi.write("\n")
+			archi.write("\""+str(nodoteml.getabajo().getinfo())+"\"")
+			archi.write(str("->"))
+			archi.write("\""+str(nodoteml.getinfo())+"\"")
+			archi.write("\n")
+			nodoteml=nodoteml.getabajo()
+		
+		while (nodotemd!=None and nodotemd.getsig()!=None):
+			archi.write("\""+str(nodotemd.getinfo())+"\"")
+			archi.write(str("->"))
+			archi.write("\""+str(str(nodotemd.getsig().getinfo()))+"\"")
+			archi.write("\n")
+			archi.write("\""+str(nodotemd.getsig().getinfo())+"\"")
+			archi.write(str("->"))
+			archi.write("\""+str(nodotemd.getinfo())+"\"")
+			archi.write("\n")
+
+			nodotemd=nodotemd.getsig()
+			#recien agregado
+		nodotem = self.cl
+		while (nodotem!=None):
+			nodotemh = nodotem
+			archi.write("{\n ")
+			archi.write("rank=same\n ")
+			while (nodotemh!=None ):
+				nodoadentro = nodotemh
+				print ("cabecera afurea--------",str(nodotemh.getinfo()),"")
+				archi.write("\""+str(nodotemh.getinfo())+"\"\n ")
+					
+
+			
+				nodotemh = nodotemh.getsig()
+			archi.write("}\n ")
+			nodotem = nodotem.getabajo()
+
+
+			#ffffff
+
+		#agregar nodos superiosres
+		nodotem = self.cl
+		while (nodotem!=None):
+			nodotemh = nodotem
+			while (nodotemh!=None ):
+				nodoadentro = nodotemh
+				print ("cabecera afurea--------",str(nodotemh.getinfo()),"")
+				try:
+					archi.write("\""+str(nodotemh.getante().getinfo())+"\"")
+					archi.write(str("->"))
+					archi.write("\""+str(nodotemh.getinfo())+"\"")
+					archi.write("[constraint=false]")
+					archi.write("\n")
+					archi.write("\""+str(nodotemh.getinfo())+"\"")
+					archi.write(str("->"))
+					archi.write("\""+str(nodotemh.getante().getinfo())+"\"")
+					archi.write("[constraint=false]")
+					archi.write("\n")
+					avlr = nodotemh.getavl()
+					if (avlr!=None):
+						parametro=avlr.recorrer()
+						archi.write(parametro)
+						archi.write("\""+str(nodotemh.getinfo())+"\"")
+						archi.write(str("->"))
+						archi.write("\""+str("t"+avlr.obtener_r__m())+"\"")
+						archi.write("\n")
+
+
+					
+				except Exception:
+					print("error grafo ageegar letra")
+					
+
+				
+
+				while( nodoadentro!=None ):		
+					#print ("cabecera",nodotem.getinfo(),"--primernodo--",nodotemh.getinfo(),"--info--",nodoadentro.getinfo())
+					#print ("cabecera dentro",nodoadentro.getinfo())
+					nodoadentro = nodoadentro.getatras()
+				nodotemh = nodotemh.getsig()
+			nodotem = nodotem.getabajo()
+
+		nodotem = self.cl
+		while (nodotem!=None):
+			nodotemh = nodotem
+			while (nodotemh!=None ):
+				nodoadentro = nodotemh
+
+				print ("cabecera afurea",nodoadentro.getinfo())
+
+				while( nodoadentro!=None ):	
+					if(nodoadentro.getatras()!=None):	
+						print ("cabecera",nodotem.getinfo(),"--primernodo--",nodotemh.getinfo(),"--info--",nodoadentro.getinfo())
+						print ("cabecera dentro",nodoadentro.getinfo())
+					try :
+						archi.write("\""+str(nodoadentro.getadelante().getinfo())+"\"")
+						archi.write(str("->"))
+						archi.write("\""+str(nodoadentro.getinfo())+"\"")
+						archi.write("\n")
+						archi.write("\n")
+						archi.write("\""+str(nodoadentro.getinfo())+"\"")
+						archi.write(str("->"))
+						archi.write("\""+str(nodoadentro.getadelante().getinfo())+"\"")
+						archi.write("\n")
+						
+						avlr = nodoadentro.getavl()
+						if(avlr!=None):
+							parametro=avlr.recorrer()
+							archi.write(parametro)
+							archi.write("\""+str(nodoadentro.getinfo())+"\"")
+							archi.write(str("->"))
+							archi.write("\""+str("t"+avlr.obtener_r__m())+"\"")
+							archi.write("\n")
+
+
+					except :
+						pass
+					nodoadentro = nodoadentro.getatras()
+				nodotemh = nodotemh.getsig()
+			nodotem = nodotem.getabajo()
+
+		#agregar columnas
+		nodotem = self.cdir
+		while (nodotem!=None):
+			nodotemh = nodotem
+			while (nodotemh!=None ):
+				if (nodotemh.getarriba()!=None):
+					archi.write("\n")
+					archi.write("\""+str(nodotemh.getarriba().getinfo())+"\"")
+					archi.write(str("->"))
+					archi.write("\""+str(nodotemh.getinfo())+"\"")
+					archi.write("\n")
+					archi.write("\""+str(nodotemh.getinfo())+"\"")
+					archi.write(str("->"))
+					archi.write("\""+str(nodotemh.getarriba().getinfo())+"\"")
+					archi.write("\n")
+
+				nodoadentro = nodotemh
+				while(nodoadentro!=None and nodoadentro.getatras()!=None):
+					#dot.edge(str(nodoadentro.getinfo()), str(nodoadentro.getatras().getinfo()))
+					#dot.edge(str(nodoadentro.getatras().getinfo()), str(nodoadentro.getinfo()))
+					#print ("cabecera",nodotem.getinfo(),"--primernodo--",nodotemh.getinfo(),"--info--",nodoadentro.getinfo())
+					nodoadentro = nodoadentro.getatras()
+				nodotemh = nodotemh.getabajo()
+			nodotem = nodotem.getsig()	
+
+
+		archi.write("\n ")
+		archi.write("}")
+		archi.close()
+		#cambiar la direccion del archivo txt creado y a del dot
+		check_output('"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe" -Tjpg C:\\Users\\HP\\datosm.txt -o C:\\Users\\HP\\Documents\\1.1\\grafom1.jpg', shell=True)
 
 
 
@@ -1010,7 +1282,12 @@ def nodoactualcondir(nodotemdir,nombre):
 		temp = temp.getabajo()
 
 	return temp
-
+def generar_random():
+	longitud = 15
+	valores = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	p = ""
+	p = p.join([choice(valores) for i in range(longitud)])
+	return p
 
 
 

@@ -2,7 +2,6 @@ import nodos
 from subprocess import check_output
 class ListaS:
 
-	
 	def __init__(self):
 		self.cabeza=None
 		self.tam = 0
@@ -24,13 +23,16 @@ class ListaS:
 		tt = str (self.tam)
 		return tt
 
-
-
-
 	def mostrar(self):
 		nodomost = self.cabeza
 		while (nodomost!= None):
 			print ("valor: ",nodomost.getinfo())
+			nodomost = nodomost.getsig()
+
+	def mostrarActivos(self):
+		nodomost = self.cabeza
+		while (nodomost!= None):
+			print ("valor: ",nodomost.getinfo().obtenerdato())
 			nodomost = nodomost.getsig()
 
 	def borrar (self,indice):

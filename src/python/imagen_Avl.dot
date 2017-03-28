@@ -1,0 +1,23 @@
+
+ digraph g{
+t7[label="7"];
+ t7;t7;
+t10[label="10"];
+ t10;t10;
+t9[label="9"];
+ t9-> t7;t9-> t10;
+t48[label="48"];
+ t48;t48;
+t31[label="31"];
+ t31;t31-> t48;
+t17[label="17"];
+ t17-> t9;t17-> t31;
+t60[label="60"];
+ t60;t60;
+t98[label="98"];
+ t98;t98;
+t90[label="90"];
+ t90-> t60;t90-> t98;
+t51[label="51"];
+ t51-> t17;t51-> t90;
+}

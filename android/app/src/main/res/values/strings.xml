@@ -12,4 +12,10 @@
     <string name="error_field_required">Campo Obligatorio</string>
     <string name="permission_rationale">"Permiso para contactos es requerido para autocompletar el login."
     </string>
+    <string name="title_activity_main">EDD Renta Activos</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Acerca de</string>
 </resources>

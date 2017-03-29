@@ -1,6 +1,6 @@
 package com.usacedd.estuardoarevalo.eddrentaarticulos.api;
 
-import com.usacedd.estuardoarevalo.eddrentaarticulos.api.modelos.IniciarSesionResponse;
+import com.usacedd.estuardoarevalo.eddrentaarticulos.api.respuestas.IniciarSesionResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_rentar_activo"
+            android:icon="@drawable/ic_menu_shopping"
+            android:title="Rentar Activo" />
+        <item
+            android:id="@+id/nav_retornar_activo"
+            android:icon="@drawable/ic_menu_return"
+            android:title="Devolver Activo" />
+    </group>
+
+    <item android:title="Sesión">
+        <menu>
+            <item
+                android:id="@+id/nav_cerrar_sesion"
+                android:icon="@drawable/ic_menu_exit"
+                android:title="Cerrar Sesión" />
+        </menu>
+    </item>
+
+</menu>

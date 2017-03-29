@@ -1,9 +1,10 @@
-package com.usacedd.estuardoarevalo.eddrentaarticulos;
+package com.usacedd.estuardoarevalo.eddrentaarticulos.actividades;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -14,7 +15,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -31,9 +31,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.usacedd.estuardoarevalo.eddrentaarticulos.R;
 import com.usacedd.estuardoarevalo.eddrentaarticulos.api.ApiUrls;
 import com.usacedd.estuardoarevalo.eddrentaarticulos.api.PythonApi;
-import com.usacedd.estuardoarevalo.eddrentaarticulos.api.modelos.IniciarSesionResponse;
+import com.usacedd.estuardoarevalo.eddrentaarticulos.api.respuestas.IniciarSesionResponse;
+import com.usacedd.estuardoarevalo.eddrentaarticulos.modelos.SesionUsuario;
+import com.usacedd.estuardoarevalo.eddrentaarticulos.utilidades.Preferencias;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +80,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
 
         mContext = getApplicationContext();
+
+        //revisar si ya existe una sesion de usuario iniciada
+        SesionUsuario sesionUsuario = Preferencias.getSesionUsuario(mContext);
+        if (sesionUsuario!=null){
+            goToMainActivity();
+        }
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiUrls.pythonApi)
@@ -174,10 +183,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mUsuarioView.getText().toString();
+        final String email = mUsuarioView.getText().toString();
         String password = mPasswordView.getText().toString();
-        String empresa = mEmpresaView.getText().toString();
-        String departamento = mDepartamentoView.getText().toString();
+        final String empresa = mEmpresaView.getText().toString();
+        final String departamento = mDepartamentoView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -200,11 +209,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cancel = true;
         }
 
+
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
         } else {
+
+            // ---------- solo para debug ----------------
+            SesionUsuario sesionUsuario = new SesionUsuario();
+            sesionUsuario.usuario = email;
+            sesionUsuario.empresa = empresa;
+            sesionUsuario.departamento = departamento;
+            Preferencias.guardarSesionUsuario(mContext, sesionUsuario);
+            goToMainActivity();
+            // -------------------------------------------
+
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
@@ -216,7 +237,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                     if (true) {
 
+                        //guardar la sesion del usuario y luego lanzar la actividad de inicio
+                        SesionUsuario sesionUsuario = new SesionUsuario();
+                        sesionUsuario.usuario = email;
+                        sesionUsuario.empresa = empresa;
+                        sesionUsuario.departamento = departamento;
+                        Preferencias.guardarSesionUsuario(mContext, sesionUsuario);
+
                         Toast.makeText(mContext, "Login Correcto", Toast.LENGTH_SHORT).show();
+
+                        goToMainActivity();
 
                     } else {
                         mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -327,7 +357,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mUsuarioView.setAdapter(adapter);
     }
 
-
     private interface ProfileQuery {
         String[] PROJECTION = {
                 ContactsContract.CommonDataKinds.Email.ADDRESS,
@@ -336,6 +365,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
+    }
+
+    private void goToMainActivity(){
+        // Inicia la activiad principal
+        Intent mainIntent = new Intent().setClass(
+                mContext, MainActivity.class);
+        startActivity(mainIntent);
+        finish();
     }
 }
 

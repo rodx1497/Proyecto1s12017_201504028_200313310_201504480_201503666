@@ -1,4 +1,4 @@
-package com.usacedd.estuardoarevalo.eddrentaarticulos.api.modelos;
+package com.usacedd.estuardoarevalo.eddrentaarticulos.api.respuestas;
 
 import com.google.gson.annotations.SerializedName;
 

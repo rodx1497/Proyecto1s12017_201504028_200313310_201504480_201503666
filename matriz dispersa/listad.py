@@ -585,9 +585,11 @@ class listad1:
 			nodotemh = nodotem
 			while (nodotemh!=None ):
 				nodoadentro = nodotemh
-				if(avlr!=None):
-					avlrr =nodotemh.getavl()
-					#todos = avlr.
+				avlrr =nodotemh.getavl()
+				if(avlrr!=None):
+					
+					k = avlrr.listarActivos()
+					todos =todos+ k.lista_comas()
 
 
 				
@@ -609,13 +611,67 @@ class listad1:
 
 				while( nodoadentro!=None ):	
 					if(nodoadentro.getatras()!=None):	
-						print ("cabecera",nodotem.getinfo(),"--primernodo--",nodotemh.getinfo(),"--info--",nodoadentro.getinfo())
-						print ("cabecera dentro",nodoadentro.getinfo())
+						avlrr =nodoadentro.getavl()
+						if(avlrr!=None):
+							if(todos==""):
+								k = avlrr.listarActivos()
+								todos =todos+ k.lista_comas()
+							else:
+								k = avlrr.listarActivos()
+								todos =todos+ ","+k.lista_comas()
 
 
 					nodoadentro = nodoadentro.getatras()
 				nodotemh = nodotemh.getsig()
 			nodotem = nodotem.getabajo()
+
+		return todos
+
+	def ver_por_user(self,user,emp,dep):
+		todos=""
+		nodotem= self.cl
+		nodotemdep = self.cdir
+
+		while (nodotem!=None):
+			if ((dep) ==(str(nodotem.getinfo()))):
+				break
+			nodotem = nodotem.getabajo()
+
+		nododotemub = nodosd.nodosd1()
+		while (nodotem!=None):
+			if (cabeceral(nodotem)!=None):
+				print ("nodo del cabeceral",nodotem.getinfo(),"cabeceral",cabeceral(nodotem).getinfo())
+				print ("nodo del cabeceral2",user,"cabeceral2",emp)
+				if (emp == cabeceral(nodotem).getinfo()):
+					nododd = nodotem
+					if (user ==(str(nodotem.getinfo())) and emp == cabeceral(nodotem).getinfo()):
+						nododotemub =nodotem
+						if(nododotemub.getavl()==None):
+							break
+						else:
+							avltemp = nododotemub.getavl()
+							k = avltemp.listarActivos()
+							todos =todos+ k.lista_comas()
+							break
+					while (nododd!=None):
+
+						if (user == nododd.getinfo()):
+							nododotemub =nododd
+							numram = generar_random()
+							if(nododotemub.getavl()==None):
+								break
+							else:
+								avltemp = nododotemub.getavl()
+								if(todos==""):
+									k = avltemp.listarActivos()
+									todos =todos+ k.lista_comas()
+								else:
+									k = avltemp.listarActivos()
+									todos =todos+ ","+k.lista_comas()
+									break
+						nododd = nododd.getatras()
+
+			nodotem = nodotem.getsig()
 
 		return todos
 

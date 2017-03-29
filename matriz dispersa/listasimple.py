@@ -84,6 +84,18 @@ class ListaS:
  			t= t+1
  			nodomost = nodomost.getsig()
  		return a
+	def lista_comas(self):
+		env =""
+		tem = self.cabeza
+		while (tem!=None):
+			if(tem.getsig()!=None):
+				env =env+ str(tem.getinfo().obtenerdato())+","
+			else:
+				env =env+ str(tem.getinfo().obtenerdato())
+
+			tem= tem.getsig()
+		return env
+
 
 	def grafica (self):
 		tem = self.cabeza

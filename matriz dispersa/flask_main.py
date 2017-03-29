@@ -61,7 +61,18 @@ class Usuario():
 		descripcion=str(request.form['descripcion_producto'])
 		listad.eliminar_activo(usuario,empresa,dep,num_unico,nombre,descripcion)
 		return 	"eliminado"
-		
+
+	@app.route('/listar_activos',methods=['POST'])
+	def todos():
+		return 	listad.todos_activos()
+
+	@app.route('/lista_activos_user',methods=['POST'])
+	def algunos():
+		usuario = str(request.form['usuario'])
+		empresa= str(request.form['empresa'])
+		dep = str(request.form['departamento'])
+		return 	listad.ver_por_user(usuario,empresa,dep)
+
 
 if __name__ == "__main__":
   app.run(debug=True, host='0.0.0.0')

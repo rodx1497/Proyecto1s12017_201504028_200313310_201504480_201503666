@@ -1,0 +1,78 @@
+digraph algo{
+node [shape=box] 
+ {
+ rank=same
+ INICIO
+ "united fruit"[rankdir=LR]
+ "united fruitt"[rankdir=LR]
+ "zero"[rankdir=LR]
+ }
+ INICIO->"algo"
+INICIO->"united fruit"
+"algo"->"social"
+"social"->"algo"
+"social"->"sociales"
+"sociales"->"social"
+"united fruit"->"united fruitt"
+"united fruitt"->"united fruit"
+"united fruitt"->"zero"
+"zero"->"united fruitt"
+{
+ rank=same
+ "algo"
+ "zzz.com"
+ "fffrgrf"
+ "df.com"
+ }
+ {
+ rank=same
+ "social"
+ "mariogmail.com"
+ "aa.com"
+ }
+ {
+ rank=same
+ "sociales"
+ "agoariaogmail.com"
+ "marifogmail.com"
+ }
+ "algo"->"zzz.com"[constraint=false]
+"zzz.com"->"algo"[constraint=false]
+"zzz.com"->"fffrgrf"[constraint=false]
+"fffrgrf"->"zzz.com"[constraint=false]
+"fffrgrf"->"df.com"[constraint=false]
+"df.com"->"fffrgrf"[constraint=false]
+"social"->"mariogmail.com"[constraint=false]
+"mariogmail.com"->"social"[constraint=false]
+"mariogmail.com"->"aa.com"[constraint=false]
+"aa.com"->"mariogmail.com"[constraint=false]
+"sociales"->"agoariaogmail.com"[constraint=false]
+"agoariaogmail.com"->"sociales"[constraint=false]
+"agoariaogmail.com"->"marifogmail.com"[constraint=false]
+"marifogmail.com"->"agoariaogmail.com"[constraint=false]
+"marifogmail.com"->"mariaogmail.com"
+
+"mariaogmail.com"->"marifogmail.com"
+
+"united fruit"->"zzz.com"
+"zzz.com"->"united fruit"
+
+"zzz.com"->"mariogmail.com"
+"mariogmail.com"->"zzz.com"
+
+"mariogmail.com"->"agoariaogmail.com"
+"agoariaogmail.com"->"mariogmail.com"
+
+"united fruitt"->"fffrgrf"
+"fffrgrf"->"united fruitt"
+
+"fffrgrf"->"aa.com"
+"aa.com"->"fffrgrf"
+
+"aa.com"->"marifogmail.com"
+"marifogmail.com"->"aa.com"
+
+"zero"->"df.com"
+"df.com"->"zero"
+
+ }

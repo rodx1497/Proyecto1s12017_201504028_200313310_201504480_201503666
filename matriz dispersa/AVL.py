@@ -1,6 +1,8 @@
 from ArbolAvl import ArbolAvl
 from activo import activo
 from Cmd import cmd
+from subprocess import check_output
+from random import choice
 avl= ArbolAvl()
 avl.agregar("mesa", "mesagrande", "a51")
 avl.agregar("mesa", "mesagrande", "a74")
@@ -21,7 +23,7 @@ avl.reemplazo("piedrareemplazo", "hojas reemplazo","a51")
 avl.reemplazo("ho", "ho","a74")
 avl.reemplazo("ho", "ho","b42")
 avl.borrar("lapic", "b12", "A9")
-avl.borrar("lana", "lana", "z11")
+avl.borrar("lana", "lana", "z10")
 print("----------------------------------")
 l=avl.listarActivos()
 l.mostrarActivos()
@@ -29,3 +31,13 @@ l.mostrar()
 print("----------------------------------")
 parametro=avl.recorrer()
 print("que bien"+avl.obtenerRaiz())
+parametro=avl.recorrer()
+archi=open('datosmww.txt','w')
+archi.close()
+archi=open('datosmww.txt','a')
+archi.write("digraph algo{\nnode [shape=box] \n ")
+archi.write(parametro)
+archi.write("}")
+archi.close()
+check_output('"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe" -Tjpg C:\\Users\\HP\\datosmww.txt -o C:\\Users\\HP\\Documents\\1.1\\grafom1ej2.jpg', shell=True)
+

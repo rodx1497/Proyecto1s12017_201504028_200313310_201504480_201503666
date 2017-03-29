@@ -13,7 +13,7 @@ class Usuario():
 	@app.route('/lista_agregar',methods=['POST'])
 	def darvalor():
 		usuario = str(request.form['usuario'])
-		contra = str(request.form['contraseña']) 
+		contra = str(request.form['contrasena']) 
 		nombre = str(request.form['nombre'])
 		empresa= str(request.form['empresa'])
 		dep = str(request.form['departamento'])
@@ -34,11 +34,34 @@ class Usuario():
 	@app.route('/lista_compobrar_contra',methods=['POST'])
 	def comprobar():
 		usuario = str(request.form['usuario'])
-		contra = str(request.form['contraseña'])
+		contra = str(request.form['contrasena'])
 		empresa= str(request.form['empresa'])
 		dep = str(request.form['departamento'])
-		#comprobar la contraseña debulve true o false (usuario,contra,empresa,dep)   * debuelve none si no existe el nodo
+		#comprobar la contrasena debulve true o false (usuario,contra,empresa,dep)   * debuelve none si no existe el nodo
 		return 	listad.comprobar_inicio(usuario,contra,empresa,dep)
+
+	@app.route('/lista_modificar',methods=['POST'])
+	def modif():
+		usuario = str(request.form['usuario'])
+		empresa= str(request.form['empresa'])
+		dep = str(request.form['departamento'])
+		num_unico =str(request.form['id_producto'])
+		nombre =str(request.form['nombre_producto'])
+		descripcion=str(request.form['descripcion_producto'])
+		listad.buscar_user_modificar_activo(usuario,empresa,dep,num_unico,nombre,descripcion)
+		return 	"modificado"
+
+	@app.route('/lista_eliminar',methods=['POST'])
+	def elim():
+		usuario = str(request.form['usuario'])
+		empresa= str(request.form['empresa'])
+		dep = str(request.form['departamento'])
+		num_unico =str(request.form['id_producto'])
+		nombre =str(request.form['nombre_producto'])
+		descripcion=str(request.form['descripcion_producto'])
+		listad.eliminar_activo(usuario,empresa,dep,num_unico,nombre,descripcion)
+		return 	"eliminado"
+		
 
 if __name__ == "__main__":
   app.run(debug=True, host='0.0.0.0')

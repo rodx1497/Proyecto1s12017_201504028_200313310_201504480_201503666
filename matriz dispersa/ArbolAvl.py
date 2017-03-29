@@ -1,5 +1,6 @@
 from NodoAvl import NodoAvl
 from activo import activo
+from listasimple import ListaS
 import sys
 
 class Logical:
@@ -12,6 +13,7 @@ class Logical:
 
 class ArbolAvl:
     global raiz
+    global listaAct
     cadena=""
     
     def __init__(self):
@@ -21,6 +23,9 @@ class ArbolAvl:
     def raizArbol(self):
         return self.raiz
     
+    def obtenerRaiz(self):
+        return self.raizArbol().visitar()
+
     def rotacionII(self, n, n1):
         n.ramaIzdo(n1.subarbolDcho())
         n1.ramaDcho(n)
@@ -141,6 +146,29 @@ class ArbolAvl:
         dato = valor
         flag = Logical(False) 
         self.raiz = self.borrarAvl(self.raiz, dato, flag)
+
+    def obtenerdato(self):  
+        self.raiz=self.raizArbol()
+        o = self.raiz.dato
+        print("RAIZ="+str(o.obtenerdato()))
+        try:
+            if self.raiz.izdo!=None:
+                p = self.raiz.izdo.dato
+                print("RAIZ-NODO IZQ= "+str(p.obtenerdato()))
+                pass
+        except:
+           # print "Unexpected error:", sys.exc_info()[0]
+            raise
+        try:
+            if self.raiz.dcho!=None:
+                q = self.raiz.dcho.dato
+                print("RAIZ-NODO DER= "+str(q.obtenerdato()))
+                pass
+        except:
+           # print "Unexpected error:", sys.exc_info()[0]
+            raise        
+        self.grafo()
+        return self.cadena
         
     def borrarAvl(self, r, clave, cambiaAltura):
         if (r == None): 
@@ -253,9 +281,25 @@ class ArbolAvl:
         self.grafo()
         return self.cadena
 
-    def obtener_r__m(self):
-        o = self.raiz.dato
-        return str(o.obtenerdato())
+    def reemplazar_solo_dato(self, valor, nombre, desc):
+        dato=None
+        dato = valor
+        self.raiz = self.reemplazo_datos(self.raiz, dato, nombre, desc)
+    
+    def reemplazo_datos(self, r, clave, nombre, desc):
+        if (r == None): 
+            print(" Nodo no encontrado ")
+        elif (clave.menorQue(r.valorNodo())): 
+            iz = self.reemplazo_datos(r.subarbolIzdo(),clave, nombre, desc)
+        elif (clave.mayorQue(r.valorNodo())):
+            dr=None   
+            dr = self.reemplazo_datos(r.subarbolDcho(), clave, nombre, desc)  
+        else:  # Nodo encontrado    
+            act=r.valorNodo()
+            act.nombre=nombre
+            act.desc=desc
+            r.setValor(act)
+        return r
 
     def inorden(self, r): 
         if(r != None):  
@@ -272,7 +316,7 @@ class ArbolAvl:
            # print "Unexpected error:", sys.exc_info()[0]
                 raise
             r1= r.visitar()
-            aux=aux+("t"+str(r1)+"[label=\""+str(r1)+"\"];")
+            aux=aux+("t"+str(r1)+"[label=\""+str(r1)+str(r.visitar_data())+"\"];")
             self.inorden (r.subarbolDcho())
             try:
                 if r.dcho!=None:
@@ -282,8 +326,36 @@ class ArbolAvl:
            # print "Unexpected error:", sys.exc_info()[0]
                 raise
             self.cadena=self.cadena+"\n"+aux+"\n t"+str(r1)+aux2+";"+"t"+str(r1)+aux3+";"
-   
+
+    def listarActivos(self):
+        self.listaAct=ListaS()
+        self.preorden(self.raiz)
+        return self.listaAct
+
+    def preorden(self, r): 
+        if(r != None):
+            r.visitar()  
+            self.listaAct.enlistar(r.valorNodo())
+            self.preorden(r.subarbolIzdo())  
+            self.preorden(r.subarbolDcho())
+            
     def grafo(self):
+        self.cadena=""
         self.inorden(self.raiz)
+        self.cadena=self.cadena+""
         print(self.cadena)
 
+    def agregar(self, nombre, desc, codigo):
+        prueba=None
+        prueba=activo(nombre, desc, codigo)
+        self.insertar(prueba)
+
+    def reemplazo(self, nombre, desc, codigo):
+        temp=None
+        temp=activo(nombre, desc, codigo)
+        self.reemplazar_solo_dato(temp, nombre, desc)
+
+    def borrar(self, nombre, desc, codigo):
+        temp=None
+        temp=activo(nombre, desc, codigo)
+        self.eliminar(temp)

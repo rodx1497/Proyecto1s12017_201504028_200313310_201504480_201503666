@@ -27,7 +27,7 @@ class Nodo():
   def ramaDcho(self, n):
     dcho=n
   def visitar():
-    r= dato.__Entero__
+    r= dato.__activo__
     print(r.obtenerdato() + " ") 
     h =  r.obtenerdato()
     return h;

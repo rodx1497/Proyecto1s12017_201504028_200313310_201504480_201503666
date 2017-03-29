@@ -21,6 +21,8 @@ class NodoAvl(nodo):
 
     def valorNodo(self):
         return self.dato
+    def setValor(self, dato):
+    	self.dato=dato
     def subarbolIzdo(self):
         return self.izdo
     def subarbolDcho(self):
@@ -31,6 +33,11 @@ class NodoAvl(nodo):
         self.izdo=n
     def ramaDcho(self, n):
         self.dcho=n
+    def visitar_data(self):
+        r= self.dato
+        print(str(r.obtenernombre()) + str(r.obtenerdesc())+" ") 
+        h =  "\n"+r.obtenernombre()+"\n"+r.obtenerdesc()
+        return h
     def visitar(self):
         r= self.dato
         print(str(r.obtenerdato()) + " ") 

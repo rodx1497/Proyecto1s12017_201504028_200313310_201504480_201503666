@@ -417,9 +417,9 @@ class listad1:
 					nododd = nodotem
 					if (user ==(str(nodotem.getinfo())) and emp == cabeceral(nodotem).getinfo()):
 						nododotemub =nodotem
-						print("comparar contraseña1",nododotemub.getcontra(),"contra",contra)
+						print("comparar contrasena1",nododotemub.getcontra(),"contra",contra)
 						if(str(nododotemub.getcontra())==str(contra)):
-							print("comparar contraseña1",nododotemub.getcontra(),"contra",contra,"verdader")
+							print("comparar contrasena1",nododotemub.getcontra(),"contra",contra,"verdader")
 							return True
 							break
 						else:
@@ -430,7 +430,7 @@ class listad1:
 
 						if (user == nododd.getinfo()):
 							nododotemub =nododd
-							print("comparar contraseña2",nododotemub.getinfo())
+							print("comparar contrasena2",nododotemub.getinfo())
 							if(str(nododotemub.getcontra())==str(contra)):
 								return True
 								break
@@ -490,7 +490,7 @@ class listad1:
 			print("No encontrado")
 
 
-	def buscar_user_agregar_activo(self,user,emp,dep,activos,desc):
+	def buscar_user_agregar_activo(self,user,emp,dep,activo,desc):
 		nodotem= self.cl
 		nodotemdep = self.cdir
 
@@ -517,7 +517,7 @@ class listad1:
 						else:
 							avltemp = nododotemub.getavl()
 							avltemp.agregar(activo,desc, numram)
-						break
+							break
 					while (nododd!=None):
 
 						if (user == nododd.getinfo()):
@@ -538,9 +538,127 @@ class listad1:
 
 	
 
+	def buscar_user_modificar_activo(self,user,emp,dep,numr,activo,desc):
+		nodotem= self.cl
+		nodotemdep = self.cdir
+
+		while (nodotem!=None):
+			if ((dep) ==(str(nodotem.getinfo()))):
+				break
+			nodotem = nodotem.getabajo()
+
+		nododotemub = nodosd.nodosd1()
+		while (nodotem!=None):
+			if (cabeceral(nodotem)!=None):
+				print ("nodo del cabeceral",nodotem.getinfo(),"cabeceral",cabeceral(nodotem).getinfo())
+				print ("nodo del cabeceral2",user,"cabeceral2",emp)
+				if (emp == cabeceral(nodotem).getinfo()):
+					nododd = nodotem
+					if (user ==(str(nodotem.getinfo())) and emp == cabeceral(nodotem).getinfo()):
+						nododotemub =nodotem
+						if(nododotemub.getavl()==None):
+							break
+						else:
+							avltemp = nododotemub.getavl()
+							avltemp.reemplazo(activo,desc, numr)
+							break
+					while (nododd!=None):
+
+						if (user == nododd.getinfo()):
+							nododotemub =nododd
+							numram = generar_random()
+							if(nododotemub.getavl()==None):
+								break
+							else:
+								avltemp = nododotemub.getavl()
+								avltemp.reemplazo(activo,desc, numr)
+								break
+						nododd = nododd.getatras()
+
+			nodotem = nodotem.getsig()
 
 
-			
+	def todos_activos(self):
+		todos=""
+		nodotem = self.cl
+		while (nodotem!=None):
+			nodotemh = nodotem
+			while (nodotemh!=None ):
+				nodoadentro = nodotemh
+				if(avlr!=None):
+					avlrr =nodotemh.getavl()
+					#todos = avlr.
+
+
+				
+
+				while( nodoadentro!=None ):		
+					#print ("cabecera",nodotem.getinfo(),"--primernodo--",nodotemh.getinfo(),"--info--",nodoadentro.getinfo())
+					#print ("cabecera dentro",nodoadentro.getinfo())
+					nodoadentro = nodoadentro.getatras()
+				nodotemh = nodotemh.getsig()
+			nodotem = nodotem.getabajo()
+
+		nodotem = self.cl
+		while (nodotem!=None):
+			nodotemh = nodotem
+			while (nodotemh!=None ):
+				nodoadentro = nodotemh
+
+				print ("cabecera afurea",nodoadentro.getinfo())
+
+				while( nodoadentro!=None ):	
+					if(nodoadentro.getatras()!=None):	
+						print ("cabecera",nodotem.getinfo(),"--primernodo--",nodotemh.getinfo(),"--info--",nodoadentro.getinfo())
+						print ("cabecera dentro",nodoadentro.getinfo())
+
+
+					nodoadentro = nodoadentro.getatras()
+				nodotemh = nodotemh.getsig()
+			nodotem = nodotem.getabajo()
+
+		return todos
+
+
+	def eliminar_activo(self,user,emp,dep,numr,activo,desc):
+		nodotem= self.cl
+		nodotemdep = self.cdir
+
+		while (nodotem!=None):
+			if ((dep) ==(str(nodotem.getinfo()))):
+				break
+			nodotem = nodotem.getabajo()
+
+		nododotemub = nodosd.nodosd1()
+		while (nodotem!=None):
+			if (cabeceral(nodotem)!=None):
+				print ("nodo del cabeceral",nodotem.getinfo(),"cabeceral",cabeceral(nodotem).getinfo())
+				print ("nodo del cabeceral2",user,"cabeceral2",emp)
+				if (emp == cabeceral(nodotem).getinfo()):
+					nododd = nodotem
+					if (user ==(str(nodotem.getinfo())) and emp == cabeceral(nodotem).getinfo()):
+						nododotemub =nodotem
+						if(nododotemub.getavl()==None):
+							break
+						else:
+							avltemp = nododotemub.getavl()
+							avltemp.borrar(activo,desc, numr)
+							break
+					while (nododd!=None):
+
+						if (user == nododd.getinfo()):
+							nododotemub =nododd
+							numram = generar_random()
+							if(nododotemub.getavl()==None):
+								break
+							else:
+								avltemp = nododotemub.getavl()
+								avltemp.borrar(activo,desc, numr)
+								break
+						nododd = nododd.getatras()
+
+			nodotem = nodotem.getsig()
+		
 
 
 			
@@ -964,10 +1082,10 @@ class listad1:
 					archi.write("\n")
 					avlr = nodotemh.getavl()
 					if (avlr!=None):
-						print("error recorrer1 ini")
+						
 						parametro=avlr.recorrer()
 						archi.write(parametro)
-						print("error recorrer1 fin")
+						
 						archi.write("\""+str(nodotemh.getinfo())+"\"")
 						archi.write(str("->"))
 						archi.write("\""+str("t"+avlr.obtenerRaiz())+"\"")
@@ -1013,10 +1131,10 @@ class listad1:
 						
 						avlr = nodoadentro.getavl()
 						if(avlr!=None):
-							print("error recorrer1 ini")
+							
 							parametro=avlr.recorrer()
 							archi.write(parametro)
-							print("error recorrer1 fin")
+							
 							archi.write("\""+str(nodoadentro.getinfo())+"\"")
 							archi.write(str("->"))
 							archi.write("\""+str("t"+avlr.obtenerRaiz())+"\"")

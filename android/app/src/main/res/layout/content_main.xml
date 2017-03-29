@@ -8,4 +8,11 @@
     tools:context="com.usacedd.estuardoarevalo.eddrentaarticulos.actividades.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="296dp"
+        android:layout_height="20dp"
+        android:text="Control"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="25dp" />
 </android.support.constraint.ConstraintLayout>

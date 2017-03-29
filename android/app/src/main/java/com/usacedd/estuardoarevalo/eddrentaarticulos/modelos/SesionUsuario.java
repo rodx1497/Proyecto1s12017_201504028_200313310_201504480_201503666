@@ -8,5 +8,6 @@ public class SesionUsuario {
     public String usuario;
     public String empresa;
     public String departamento;
+    public String nombreCompleto;
 
 }

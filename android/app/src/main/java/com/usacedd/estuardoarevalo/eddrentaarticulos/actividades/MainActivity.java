@@ -115,7 +115,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_rentar_activo) {
-
+            Intent mIntent = new Intent(getApplicationContext(), RentarActivity.class);
+            startActivity(mIntent);
         } else if (id == R.id.nav_retornar_activo) {
 
         } else if (id == R.id.nav_cerrar_sesion) {

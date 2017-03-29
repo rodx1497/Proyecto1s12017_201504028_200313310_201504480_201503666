@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">EDD Renta Articulos</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Usuario</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Iniciar Sesión</string>
+    <string name="action_sign_in_short">Iniciar Sesión</string>
+    <string name="error_invalid_email">Usuario Inválido</string>
+    <string name="error_invalid_password">Password Invalido</string>
+    <string name="error_incorrect_password">Password Incorrecto</string>
+    <string name="error_field_required">Campo Obligatorio</string>
+    <string name="permission_rationale">"Permiso para contactos es requerido para autocompletar el login."
+    </string>
+</resources>

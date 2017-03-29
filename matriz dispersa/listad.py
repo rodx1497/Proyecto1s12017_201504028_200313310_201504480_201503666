@@ -511,13 +511,12 @@ class listad1:
 						numram = generar_random()
 						if(nododotemub.getavl()==None):
 							avl= ArbolAvl()
-							prueba1=activo(activo,desc, numram)
-							avl.insertar(prueba1)
+							avl.agregar(activo,desc, numram)
 							nododotemub.setavl(avl)
+							break
 						else:
 							avltemp = nododotemub.getavl()
-							prueba2=activo(activos,desc,numram)
-							avltemp.insertar(prueba2)
+							avltemp.agregar(activo,desc, numram)
 						break
 					while (nododd!=None):
 
@@ -526,13 +525,12 @@ class listad1:
 							numram = generar_random()
 							if(nododotemub.getavl()==None):
 								avl= ArbolAvl()
-								prueba1=activo(activo,desc, numram)
-								avl.insertar(prueba1)
+								avl.agregar(activo,desc, numram)
 								nododotemub.setavl(avl)
+								break
 							else:
 								avltemp = nododotemub.getavl()
-								prueba2=activo(activos,desc,numram)
-								avltemp.insertar(prueba2)
+								avltemp.agregar(activo,desc, numram)
 								break
 						nododd = nododd.getatras()
 
@@ -966,11 +964,13 @@ class listad1:
 					archi.write("\n")
 					avlr = nodotemh.getavl()
 					if (avlr!=None):
+						print("error recorrer1 ini")
 						parametro=avlr.recorrer()
 						archi.write(parametro)
+						print("error recorrer1 fin")
 						archi.write("\""+str(nodotemh.getinfo())+"\"")
 						archi.write(str("->"))
-						archi.write("\""+str("t"+avlr.obtener_r__m())+"\"")
+						archi.write("\""+str("t"+avlr.obtenerRaiz())+"\"")
 						archi.write("\n")
 
 
@@ -1013,11 +1013,13 @@ class listad1:
 						
 						avlr = nodoadentro.getavl()
 						if(avlr!=None):
+							print("error recorrer1 ini")
 							parametro=avlr.recorrer()
 							archi.write(parametro)
+							print("error recorrer1 fin")
 							archi.write("\""+str(nodoadentro.getinfo())+"\"")
 							archi.write(str("->"))
-							archi.write("\""+str("t"+avlr.obtener_r__m())+"\"")
+							archi.write("\""+str("t"+avlr.obtenerRaiz())+"\"")
 							archi.write("\n")
 
 

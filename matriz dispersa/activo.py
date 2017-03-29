@@ -10,6 +10,12 @@ class activo:
     def obtenerdato(self):
         return self.codigo
 
+    def obtenernombre(self):
+        return self.nombre
+
+    def obtenerdesc(self):
+    	return self.desc
+
     def igualQue(self, op2):
         n2=activo(None,None, None)
         n2 = op2

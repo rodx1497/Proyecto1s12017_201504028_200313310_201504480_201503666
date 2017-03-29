@@ -5,6 +5,8 @@
  */
 package reportes;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Rod
@@ -46,10 +48,20 @@ public class Repor extends javax.swing.JFrame {
         setTitle("Reportes");
 
         jButton1.setText("Matriz Dispersa");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTextField1.setText("Nombre de la empresa");
 
         jButton2.setText("Activos de la empresa");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTextField2.setText("Nombre de un departamento");
 
@@ -149,6 +161,26 @@ public class Repor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+                c_op c = new c_op();
+    String graf =        c.matriz();
+           String dirimg =graf;
+        imagen imgg = new imagen(dirimg);
+
+      imgg.show(dirimg);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+//     c_op c = new c_op();
+//    String graf =        c.matriz();
+//           String dirimg =graf;
+//        imagen imgg = new imagen(dirimg);
+//
+//      imgg.show(dirimg);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

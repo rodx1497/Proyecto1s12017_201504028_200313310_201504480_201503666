@@ -1,5 +1,5 @@
 import listad
-
+import os
 listad = listad.listad1()
 #listad.agregar(g[0],g[1])
 usuario= "mariogmail.com"
@@ -95,3 +95,5 @@ listad.eliminar_activo("mariaogmail.com","united fruitt","sociales","777","Nombr
 print(listad.todos_activos())
 print(listad.ver_por_user("marifogmail.com","united fruitt","sociales"))
 #listad.graficarcompleto()
+#print(listad.ver_por_empresa("united fruitt"))
+print("dir",os.getcwd())

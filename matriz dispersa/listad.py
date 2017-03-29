@@ -1,5 +1,6 @@
 import nodosd
 import listasimple
+import os
 from random import choice
 from subprocess import check_output
 from ArbolAvl import ArbolAvl
@@ -1233,7 +1234,9 @@ class listad1:
 		archi.write("}")
 		archi.close()
 		#cambiar la direccion del archivo txt creado y a del dot
-		check_output('"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe" -Tjpg C:\\Users\\HP\\datosm.txt -o C:\\Users\\HP\\Documents\\1.1\\grafom1.jpg', shell=True)
+		print('"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe" -Tjpg datosm.txt -o "'+os.getcwd()+'\\grafom1.jpg"')
+		check_output('"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe" -Tjpg datosm.txt -o "'+os.getcwd()+'\\grafom1.jpg"', shell=True)
+		return str(os.getcwd()+"\\grafom1.jpg")
 
 
 
